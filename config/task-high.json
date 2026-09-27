@@ -1,0 +1,16 @@
+{
+  "task": "Update the admin access policy so that both admin and superadmin roles can access the admin area.",
+  "acceptance": [
+    "admin returns true.",
+    "superadmin returns true.",
+    "user returns false.",
+    "guest returns false.",
+    "Add or update automated tests for the new behavior."
+  ],
+  "constraints": [
+    "Do not add dependencies.",
+    "Do not change unrelated files.",
+    "Do not weaken access for any other role.",
+    "Do not commit or push."
+  ]
+}

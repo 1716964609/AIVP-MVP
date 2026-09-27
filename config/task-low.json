@@ -1,0 +1,13 @@
+{
+  "task": "Update normalize_username so that it trims surrounding whitespace and converts the username to lowercase.",
+  "acceptance": [
+    "normalize_username(\"  Alice  \") returns \"alice\".",
+    "Existing whitespace trimming behavior remains supported.",
+    "Add or update automated tests."
+  ],
+  "constraints": [
+    "Do not add dependencies.",
+    "Do not change unrelated files.",
+    "Do not commit or push."
+  ]
+}

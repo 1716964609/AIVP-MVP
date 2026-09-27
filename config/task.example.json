@@ -1,0 +1,13 @@
+{
+  "task": "Implement input validation for GET /users/:id.",
+  "acceptance": [
+    "Invalid UUID returns HTTP 400.",
+    "Valid UUID keeps existing behavior.",
+    "Add or update automated tests."
+  ],
+  "constraints": [
+    "Do not change the database schema.",
+    "Do not add new dependencies.",
+    "Do not commit or push."
+  ]
+}

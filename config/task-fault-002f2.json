@@ -1,0 +1,18 @@
+{
+  "task": "Extend calculate_total with a member discount and a maximum discount cap.",
+  "acceptance": [
+    "Non-members pay the original subtotal.",
+    "Members receive a 10 percent discount using integer arithmetic.",
+    "The discount must never exceed 2000.",
+    "subtotal 10000 for a member returns 9000.",
+    "subtotal 50000 for a member returns 48000.",
+    "Negative subtotal must continue to raise ValueError.",
+    "Add or update automated tests for the new behavior."
+  ],
+  "constraints": [
+    "Do not add dependencies.",
+    "Use integer arithmetic only; do not introduce float calculations.",
+    "Do not change unrelated files.",
+    "Do not commit or push."
+  ]
+}

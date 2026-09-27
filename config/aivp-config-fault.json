@@ -1,0 +1,88 @@
+{
+  "codex": {
+    "binary": "codex",
+    "model": "",
+    "reasoning_effort": "low",
+    "generator_extra_args": [
+      "exec",
+      "--sandbox",
+      "workspace-write",
+      "--ephemeral",
+      "--config",
+      "approval_policy=\"never\""
+    ],
+    "risk_extra_args": [
+      "exec",
+      "--sandbox",
+      "read-only",
+      "--ephemeral",
+      "--config",
+      "approval_policy=\"never\""
+    ]
+  },
+  "claude": {
+    "binary": "claude",
+    "model": "sonnet",
+    "max_turns": 2,
+    "extra_args": [
+      "-p",
+      "--output-format",
+      "json"
+    ]
+  },
+  "budgets": {
+    "max_fix_iterations": 2,
+    "codex_max_calls": 4,
+    "claude_max_calls": 3,
+    "codex_timeout_seconds": 300,
+    "claude_timeout_seconds": 300,
+    "whole_run_timeout_seconds": 900
+  },
+
+  
+  "verification": [
+  {
+    "name": "unit-tests",
+    "argv": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "timeout_seconds": 120,
+    "required": true
+  },
+  {
+    "name": "downstream-pricing-contract",
+    "argv": [
+      "python3",
+      "/path/to/AIVP_MVP_v1/scripts/pricing_contract_gate.py"
+    ],
+    "timeout_seconds": 60,
+    "required": true
+  }
+],
+
+
+  "risk_policy": {
+    "high_risk_paths": [
+      "auth/**",
+      "security/**",
+      "db/migrations/**",
+      "infra/iam/**",
+      ".github/workflows/**"
+    ],
+    "high_risk_patterns": [
+      "DROP TABLE",
+      "DELETE FROM",
+      "AdministratorAccess",
+      "iam:PassRole"
+    ]
+  },
+  "diff_context": {
+    "max_chars": 120000
+  }
+}

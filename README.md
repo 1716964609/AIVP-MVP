@@ -647,3 +647,105 @@ Next Design
 ```
 
 というEngineering Cycleの整理を重視しています。
+
+
+---
+
+## 公開版について
+
+AIVP-MVP v1 は、AI が生成したコード変更に対して、
+
+- 検証
+- 修正
+- Risk Assessment
+- Human Escalation
+
+をどこまで自動化できるか検証するための、**ローカル実験用MVP**です。
+
+本リポジトリは Production-ready なシステムではありません。
+
+以下のものを保証するものではありません。
+
+- 完全なSecurity Boundary
+- コードの正しさの保証
+- Autonomous Merge
+- Production Deployment
+- Production-grade Isolation
+- AI Model Failure の完全な防止
+
+AIVP-MVP v1 の目的は、
+
+> **AIにコードを書かせることそのものではなく、  
+> どこまでAIに任せ、どこから人間へ戻すべきかを検証すること**
+
+です。
+
+### Fault Injection用Configについて
+
+以下の実験用Configには、公開用のplaceholder pathを使用しています。
+
+- `config/aivp-config-fault.json`
+- `config/aivp-config-fault2.json`
+
+Fault Injection実験を再現する場合は、
+
+```text
+/path/to/AIVP_MVP_v1
+```
+
+を、自分のローカル環境にcloneしたAIVP-MVPのabsolute pathへ置き換えてください。
+
+### Controlled Faultについて
+
+Run #002F-2 で使用したFaultは、
+実運用中に自然発生した障害ではありません。
+
+以下の制御ループを検証するために、意図的に一度だけFaultを注入しています。
+
+```text
+Detect
+  ↓
+Repair
+  ↓
+Re-verify
+  ↓
+Converge
+```
+
+したがって、Run #002F-2 は
+
+「AIが偶然発生したProduction Bugを自律修復した」
+
+という意味ではなく、
+
+**Controlled Fault Injectionに対して、bounded autonomous repair loopが成立するか**
+
+を確認した実験です。
+
+### Specification Conflictについて
+
+Run #002F-1 は、AIが単純に修正に失敗した実験ではありません。
+
+TaskとExternal Contractの間に矛盾が存在する状況で、
+
+```text
+Task
+  ↕ conflict
+External Contract
+```
+
+AIに無理やり一方を選ばせず、
+
+```text
+HUMAN_REQUIRED
+```
+
+へ安全にEscalateできるかを確認しています。
+
+### 技術報告書
+
+各Experimentの設計、実行結果、Metrics、観察事項については以下を参照してください。
+
+[`docs/EXPERIMENT_REPORT.md`](docs/EXPERIMENT_REPORT.md)
+
+
